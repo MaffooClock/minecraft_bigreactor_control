@@ -65,8 +65,7 @@ Default values
 - Maximum Passive Cooling Temperature: 1,400^C (will lower control rods above this value)
 - Minimum Active Cooling Temperature: 300^C (will raise the control rods below this value)
 - Maximum Active Cooling Temperature: 420^C (will lower control rods above this value)
-- Optimal Turbine RPM:  900, 1,800, or 2,700 (divisible by 900)
-	- New user-controlled option for target speed of turbines, defaults to 2726RPM, which is high-optimal.
+- Turbine RPM:  500 - 2,500 (increments of 500)
 
 Requirements
 ----------------------------
@@ -971,20 +970,20 @@ UI.handleTurbineMonitorClick = function(self, turbineIndex, monitorIndex)
 
 	if (xClick == 22) and (yClick == 6) and (sideClick == monitorNames[monitorIndex]) then
 		printLog("Decrease to Turbine RPM requested by "..progName.." GUI in handleTurbineMonitorClick(turbineIndex="..turbineIndex..",monitorIndex="..monitorIndex..").")
-		local rpmRateAdjustment = 909
+		local rpmRateAdjustment = 500
 		local newTurbineBaseSpeed = turbineBaseSpeed - rpmRateAdjustment
-		if newTurbineBaseSpeed < 908 then
-			newTurbineBaseSpeed = 908
+		if newTurbineBaseSpeed < 500 then
+			newTurbineBaseSpeed = 500
 		end
 		sideClick, xClick, yClick = 0, 0, 0
 		_G[turbineNames[turbineIndex]]["TurbineOptions"]["BaseSpeed"] = newTurbineBaseSpeed
 		config.save(turbineNames[turbineIndex]..".options", _G[turbineNames[turbineIndex]])
 	elseif (xClick == 29) and (yClick == 6) and (sideClick == monitorNames[monitorIndex]) then
 		printLog("Increase to Turbine RPM requested by "..progName.." GUI in handleTurbineMonitorClick(turbineIndex="..turbineIndex..",monitorIndex="..monitorIndex..").")
-		local rpmRateAdjustment = 909
+		local rpmRateAdjustment = 500
 		local newTurbineBaseSpeed = turbineBaseSpeed + rpmRateAdjustment
-		if newTurbineBaseSpeed > 2726 then
-			newTurbineBaseSpeed = 2726
+		if newTurbineBaseSpeed > 2500 then
+			newTurbineBaseSpeed = 2500
 		end
 		sideClick, xClick, yClick = 0, 0, 0
 		_G[turbineNames[turbineIndex]]["TurbineOptions"]["BaseSpeed"] = newTurbineBaseSpeed
